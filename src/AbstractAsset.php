@@ -12,4 +12,9 @@ namespace Endroid\Asset;
 abstract class AbstractAsset
 {
     abstract public function getData(): string;
+
+    public function __toString(): string
+    {
+        return $this->getData();
+    }
 }
