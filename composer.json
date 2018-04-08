@@ -1,0 +1,36 @@
+{
+    "name": "endroid/asset",
+    "description": "Endroid Asset",
+    "keywords": ["endroid", "asset"],
+    "homepage": "https://github.com/endroid/asset",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen van den Enden",
+            "email": "info@endroid.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "symfony/options-resolver": "^3.4|^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7|^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Endroid\\Asset\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Endroid\\Asset\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
