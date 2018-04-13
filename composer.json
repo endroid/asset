@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "endroid/installer": "^1.0",
+        "endroid/installer": "^1.0.3",
         "symfony/options-resolver": "^3.4|^4.0"
     },
     "require-dev": {
