@@ -9,12 +9,7 @@
 
 namespace Endroid\Asset;
 
-abstract class AbstractAsset implements AssetInterface
+interface AssetInterface
 {
-    abstract public function getData(): string;
-
-    public function __toString(): string
-    {
-        return $this->getData();
-    }
+    public function getData(): string;
 }

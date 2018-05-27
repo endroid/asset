@@ -14,20 +14,18 @@ use Twig\Environment;
 final class TemplateAsset extends AbstractAsset
 {
     private $templating;
+    private $template;
+    private $parameters;
 
-    private $templateName;
-    private $templateParameters;
-
-    public function __construct(Environment $templating, string $templateName, array $templateParameters = [])
+    public function __construct(Environment $templating, string $template, array $parameters = [])
     {
         $this->templating = $templating;
-
-        $this->templateName = $templateName;
-        $this->templateParameters = $templateParameters;
+        $this->template = $template;
+        $this->parameters = $parameters;
     }
 
     public function getData(): string
     {
-        return $this->templating->render($this->templateName, $this->templateParameters);
+        return $this->templating->render($this->template, $this->parameters);
     }
 }

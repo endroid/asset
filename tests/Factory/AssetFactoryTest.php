@@ -11,14 +11,15 @@ namespace Endroid\Asset\Tests\Factory;
 
 use Endroid\Asset\DataAsset;
 use Endroid\Asset\Factory\AssetFactory;
-use PHPUnit\Framework\TestCase;
 
 class AssetFactoryTest extends TestCase
 {
     public function testFactory()
     {
         $assetFactory = new AssetFactory();
-        $asset = $assetFactory->create([
+        $assetFactory->addFactory(new DataAssetFactory());
+
+        $asset = $assetFactory->create(DataAsset::class, [
             'data' => 'Asset data'
         ]);
 

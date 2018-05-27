@@ -7,19 +7,45 @@
 [![Total Downloads](http://img.shields.io/packagist/dt/endroid/asset.svg)](https://packagist.org/packages/endroid/asset)
 [![License](http://img.shields.io/packagist/l/endroid/asset.svg)](https://packagist.org/packages/endroid/asset)
 
-Library for easy asset management. An asset can be used as an intermediate
-resource that can be resolved as a string without worrying about the inner
-workings on how the string is generated. The library offers the following types.
+Library for quick and easy asset management.
 
 * ControllerAsset: generates the string from a controller action and parameters.
 * TemplateAsset: generates the string from a template and parameters.
 * FileAsset: generates the string by loading the contents of a file.
+* UrlAsset: simply contains a string which is returned when requested.
 * DataAsset: simply contains a string which is returned when requested.
-* CachedAsset: wraps any of the above in a cache to optimize performance.
+* CacheAsset: wraps any of the above in a cache to optimize performance.
+
+All implement AssetInterface and provide the method: getData().
 
 ## Installation
 
+Use [Composer](https://getcomposer.org/) to install the library.
+
+``` bash
+$ composer require endroid/asset
+```
+
+### Frameworks
+
+The following frameworks will automatically be configured upon installation.
+
+* Symfony 3.4+ (new directory structure)
+
+Read the [endroid/installer](https://github.com/endroid/asset) documentation
+if you have any installation issues.
+
 ## Usage
+
+The easiest way to work with assets is by letting the factory create assets for
+you. This allows you to create your assets without worrying about the necessary
+dependencies.
+
+```php
+$dataAsset = $assetFactory->create([
+    'data' => 'This is the data'
+]);
+```
 
 ## Versioning
 

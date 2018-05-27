@@ -11,17 +11,21 @@ namespace Endroid\Asset;
 
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 
-final class CachedAsset extends AbstractAsset
+final class CacheAsset extends AbstractAsset
 {
     private $asset;
-    private $key;
     private $cache;
+    private $key;
+    private $tags;
+    private $expiresAfter;
 
-    public function __construct(AbstractAsset $asset, string $key, AdapterInterface $cache)
+    public function __construct(AssetInterface $asset, AdapterInterface $cache, string $key, array $tags = [], int $expiresAfter = null)
     {
         $this->asset = $asset;
-        $this->key = $key;
         $this->cache = $cache;
+        $this->key = $key;
+        $this->tags = $tags;
+        $this->expiresAfter = $expiresAfter;
     }
 
     public function getData(): string
@@ -34,6 +38,8 @@ final class CachedAsset extends AbstractAsset
         $data = $this->asset->getData();
 
         $cacheItem->set($data);
+        $cacheItem->tag($this->tags);
+        $cacheItem->expiresAfter($this->expiresAfter);
         $this->cache->save($cacheItem);
 
         return $data;

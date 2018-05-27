@@ -9,70 +9,46 @@
 
 namespace Endroid\Asset\Factory;
 
-use Endroid\Asset\AbstractAsset;
-use Endroid\Asset\CachedAsset;
-use Endroid\Asset\ControllerAsset;
-use Endroid\Asset\DataAsset;
-use Endroid\Asset\FileAsset;
-use Endroid\Asset\TemplateAsset;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Twig\Environment;
+use Endroid\Asset\AssetInterface;
+use Endroid\Asset\Exception\UnsupportedAssetClassException;
+use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
+use Endroid\Asset\Guesser\ClassGuesser;
 
-final class AssetFactory
+class AssetFactory
 {
-    private $kernel;
-    private $requestStack;
-    private $templating;
-    private $cache;
-    private $optionsResolver;
+    private $classGuesser;
+    private $factories;
 
-    public function __construct(
-        HttpKernelInterface $kernel = null,
-        RequestStack $requestStack = null,
-        Environment $templating = null,
-        AdapterInterface $cache = null
-    ) {
-        $this->kernel = $kernel;
-        $this->requestStack = $requestStack;
-        $this->templating = $templating;
-        $this->cache = $cache;
-
-        $this->configureOptions();
+    public function __construct(ClassGuesser $classGuesser)
+    {
+        $this->classGuesser = $classGuesser;
+        $this->factories = [];
     }
 
-    private function configureOptions()
+    public function addFactories(iterable $factories): void
     {
-        $this->optionsResolver = new OptionsResolver();
-        $this->optionsResolver->setDefaults([
-            'controller' => null,
-            'data' => null,
-            'file' => null,
-            'template' => null,
-            'parameters' => [],
-            'cache' => null,
-        ]);
+        foreach ($factories as $factory) {
+            $this->addFactory($factory);
+        }
     }
 
-    public function create(array $options = []): AbstractAsset
+    public function addFactory(FactoryAdapterInterface $factory): void
     {
-        $options = $this->optionsResolver->resolve($options);
+        $this->factories[$factory->getAssetClassName()] = $factory;
+        $this->classGuesser->addFactory($factory);
+    }
 
-        if (isset($options['controller'])) {
-            $asset = new ControllerAsset($this->kernel, $this->requestStack, $options['controller'], $options['parameters']);
-        } elseif (isset($options['file'])) {
-            $asset = new FileAsset($options['file']);
-        } elseif (isset($options['template'])) {
-            $asset = new TemplateAsset($this->templating, $options['template'], $options['parameters']);
-        } else {
-            $asset = new DataAsset($options['data']);
+    public function create(string $className = null, array $options = []): AssetInterface
+    {
+        if (null === $className) {
+            $className = $this->classGuesser->guessClassName($options);
         }
 
-        if (isset($options['cache'])) {
-            $asset = new CachedAsset($asset, $options['cache'], $this->cache);
+        if (!isset($this->factories[$className])) {
+            throw new UnsupportedAssetClassException(sprintf('Asset class "%s" is not supported', $className));
         }
+
+        $asset = $this->factories[$className]->create($options);
 
         return $asset;
     }

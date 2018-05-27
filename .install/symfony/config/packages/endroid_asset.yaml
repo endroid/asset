@@ -4,4 +4,19 @@ services:
         autoconfigure: true
         public: false
 
-    Endroid\Asset\Factory\AssetFactory: ~
+    _instanceof:
+        Endroid\Asset\Factory\Adapter\FactoryAdapterInterface:
+            tags: ['endroid_asset.factory_adapter']
+
+    Endroid\Asset\Factory\AssetFactory:
+        calls:
+            - [addFactories, [!tagged endroid_asset.factory_adapter]]
+
+    Endroid\Asset\Guesser\ClassGuesser: ~
+
+    Endroid\Asset\Factory\Adapter\CacheAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\ControllerAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\DataAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\FileAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\TemplateAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\UrlAssetFactoryAdapter: ~
