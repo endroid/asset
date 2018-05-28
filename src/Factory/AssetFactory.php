@@ -19,9 +19,9 @@ class AssetFactory
     private $classGuesser;
     private $factories;
 
-    public function __construct(ClassGuesser $classGuesser)
+    public function __construct(ClassGuesser $classGuesser = null)
     {
-        $this->classGuesser = $classGuesser;
+        $this->classGuesser = $classGuesser ?: new ClassGuesser();
         $this->factories = [];
     }
 
