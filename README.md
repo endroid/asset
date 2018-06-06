@@ -9,6 +9,9 @@
 
 Library for quick and easy asset management.
 
+Read the [blog](https://medium.com/@endroid/pdf-generation-in-symfony-3080702353b)
+for more information on why I created this library.
+
 * ControllerAsset: generates the string from a controller action and parameters.
 * TemplateAsset: generates the string from a template and parameters.
 * FileAsset: generates the string by loading the contents of a file.
