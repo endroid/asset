@@ -18,19 +18,26 @@ final class CacheAsset extends AbstractAsset
     private $key;
     private $tags;
     private $expiresAfter;
+    private $clear;
 
-    public function __construct(AssetInterface $asset, AdapterInterface $cache, string $key, array $tags = [], int $expiresAfter = null)
+    public function __construct(AssetInterface $asset, AdapterInterface $cache, string $key, array $tags = [], int $expiresAfter = null, bool $clear = false)
     {
         $this->asset = $asset;
         $this->cache = $cache;
         $this->key = $key;
         $this->tags = $tags;
         $this->expiresAfter = $expiresAfter;
+        $this->clear = $clear;
     }
 
     public function getData(): string
     {
+        if ($this->clear) {
+            $this->cache->deleteItem($this->key);
+        }
+
         $cacheItem = $this->cache->getItem($this->key);
+
         if ($cacheItem->isHit()) {
             return $cacheItem->get();
         }

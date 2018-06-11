@@ -51,7 +51,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
 
         $asset = $this->assetFactory->create($assetClassName, $assetOptions);
 
-        return new CacheAsset($asset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after']);
+        return new CacheAsset($asset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -61,6 +61,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
                 'asset_class' => null,
                 'cache_tags' => [],
                 'cache_expires_after' => null,
+                'cache_clear' => false,
             ])
             ->setRequired(['cache_key'])
         ;
