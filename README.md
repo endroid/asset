@@ -21,23 +21,6 @@ for more information on why I created this library.
 
 All implement AssetInterface and provide the method: getData().
 
-## Installation
-
-Use [Composer](https://getcomposer.org/) to install the library.
-
-``` bash
-$ composer require endroid/asset
-```
-
-### Frameworks
-
-The following frameworks will automatically be configured upon installation.
-
-* Symfony 3.4+ (new directory structure)
-
-Read the [endroid/installer](https://github.com/endroid/asset) documentation
-if you have any installation issues.
-
 ## Usage
 
 The easiest way to work with assets is by letting the factory create assets for
@@ -46,9 +29,24 @@ dependencies.
 
 ```php
 $dataAsset = $assetFactory->create([
-    'data' => 'This is the data'
+   'controller' => CoverController::class,
+   'parameters' => ['title' => 'My PDF', 'date' => new DateTime()],
+   'cache_key' => 'cover',
+   'cache_expires_after' => 3600,
+   'cache_clear' => true, // use to purge any previously cached data
 ]);
 ```
+
+## Installation
+
+Use [Composer](https://getcomposer.org/) to install the library.
+
+``` bash
+$ composer require endroid/asset
+```
+
+When you use Symfony, the [installer](https://github.com/endroid/installer)
+makes sure that services are automatically wired.
 
 ## Versioning
 
