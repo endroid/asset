@@ -22,7 +22,7 @@ class AssetFactoryTest extends TestCase
         $assetFactory->addFactory(new DataAssetFactoryAdapter());
 
         $asset = $assetFactory->create(null, [
-            'data' => 'Asset data'
+            'data' => 'Asset data',
         ]);
 
         $this->assertInstanceOf(DataAsset::class, $asset);
