@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
+use Endroid\Asset\Exception\CacheTagsNotSupportedException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 
 final class CacheAsset extends AbstractAsset
 {
@@ -47,7 +49,14 @@ final class CacheAsset extends AbstractAsset
         $data = $this->asset->getData();
 
         $cacheItem->set($data);
-        $cacheItem->tag($this->tags);
+
+        if (count($this->tags) > 0) {
+            if (!$cacheItem instanceof TagAwareAdapterInterface) {
+                throw CacheTagsNotSupportedException::create();
+            }
+            $cacheItem->tag($this->tags);
+        }
+
         $cacheItem->expiresAfter($this->expiresAfter);
         $this->cache->save($cacheItem);
 
