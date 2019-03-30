@@ -59,9 +59,9 @@ abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
         }
 
         $factoryClassName = get_class($this);
-        $this->assetClassName = preg_replace('#Factory.?Adapter.?#i', '', $factoryClassName);
+        $this->assetClassName = (string) preg_replace('#Factory.?Adapter.?#i', '', $factoryClassName);
 
-        if (!class_exists($this->assetClassName)) {
+        if (!class_exists((string) $this->assetClassName)) {
             throw new UndefinedAssetClassException(sprintf('Asset class for asset factory "%s" could not be determined automatically. Please implement getAssetClassName() or override protected property $assetClassName.', $factoryClassName));
         }
 

@@ -22,6 +22,6 @@ final class UrlAsset extends AbstractAsset
 
     public function getData(): string
     {
-        return file_get_contents($this->url);
+        return (string) file_get_contents($this->url);
     }
 }

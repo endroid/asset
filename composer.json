@@ -14,10 +14,13 @@
     "require": {
         "php": ">=7.2",
         "endroid/installer": "^1.1.5",
-        "symfony/options-resolver": "^3.4|^4.0"
+        "symfony/options-resolver": "^3.4|^4.0",
+        "symfony/cache": "^3.4|^4.0",
+        "twig/twig": "^2.6",
+        "symfony/http-kernel": "^3.4|^4.0"
     },
     "require-dev": {
-        "endroid/test": "^1.0.9"
+        "endroid/test": "^1.1.1"
     },
     "autoload": {
         "psr-4": {

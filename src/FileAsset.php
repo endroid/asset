@@ -22,6 +22,6 @@ final class FileAsset extends AbstractAsset
 
     public function getData(): string
     {
-        return file_get_contents($this->path);
+        return (string) file_get_contents($this->path);
     }
 }

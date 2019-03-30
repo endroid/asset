@@ -13,6 +13,6 @@ namespace Endroid\Asset\Exception;
 
 use Exception;
 
-class AssetException extends Exception
+abstract class AssetException extends Exception
 {
 }
