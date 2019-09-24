@@ -14,7 +14,7 @@ namespace Endroid\Asset\Factory\Adapter;
 use Endroid\Asset\AssetInterface;
 use Endroid\Asset\CacheAsset;
 use Endroid\Asset\Factory\AssetFactory;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
@@ -22,7 +22,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
     private $cache;
     private $assetFactory;
 
-    public function __construct(AdapterInterface $cache, AssetFactory $assetFactory)
+    public function __construct(CacheItemPoolInterface $cache, AssetFactory $assetFactory)
     {
         parent::__construct(0);
 

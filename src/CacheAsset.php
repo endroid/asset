@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 final class CacheAsset extends AbstractAsset
@@ -25,7 +25,7 @@ final class CacheAsset extends AbstractAsset
 
     public function __construct(
         AssetInterface $asset,
-        AdapterInterface $cache,
+        CacheItemPoolInterface $cache,
         string $key,
         array $tags = [],
         int $expiresAfter = null,
