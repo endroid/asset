@@ -59,7 +59,10 @@ final class CacheAsset extends AbstractAsset
             $cacheItem->tag($this->tags);
         }
 
-        $cacheItem->expiresAfter($this->expiresAfter);
+        if (is_int($this->expiresAfter)) {
+            $cacheItem->expiresAfter($this->expiresAfter);
+        }
+
         $this->cache->save($cacheItem);
 
         return $data;
