@@ -17,17 +17,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FileAssetFactoryAdapter extends AbstractFactoryAdapter
 {
-    public function create(array $options = []): AssetInterface
-    {
-        $options = $this->getOptionsResolver()->resolve($options);
-
-        $asset = new FileAsset($options['path']);
-
-        return $asset;
-    }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['path']);
+    }
+
+    public function create(array $options = []): AssetInterface
+    {
+        $options = $this->getOptionsResolver()->resolve($options);
+        $asset = new FileAsset($options['path']);
+
+        return $asset;
     }
 }

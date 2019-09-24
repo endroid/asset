@@ -18,8 +18,6 @@ interface FactoryAdapterInterface
 {
     public function getAssetClassName(): string;
 
-    public function setGuesserPriority(int $guesserPriority): void;
-
     public function getGuesserPriority(): int;
 
     public function isValidGuess(array $options): bool;

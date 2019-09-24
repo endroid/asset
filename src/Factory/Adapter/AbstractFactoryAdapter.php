@@ -16,12 +16,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
-    private $optionsResolver;
+    private $guesserPriority;
 
-    protected $assetClassName;
-    protected $guesserPriority = 1;
-
-    public function setGuesserPriority(int $guesserPriority): void
+    public function __construct(int $guesserPriority = 1)
     {
         $this->guesserPriority = $guesserPriority;
     }
@@ -44,27 +41,20 @@ abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
 
     public function getOptionsResolver(): OptionsResolver
     {
-        if (null === $this->optionsResolver) {
-            $this->optionsResolver = new OptionsResolver();
-            $this->configureOptions($this->optionsResolver);
-        }
+        $optionsResolver = new OptionsResolver();
+        $this->configureOptions($optionsResolver);
 
-        return $this->optionsResolver;
+        return $optionsResolver;
     }
 
     public function getAssetClassName(): string
     {
-        if (null !== $this->assetClassName) {
-            return $this->assetClassName;
+        $assetClassName = (string) preg_replace('#Factory.?Adapter.?#i', '', get_class($this));
+
+        if (!class_exists($assetClassName)) {
+            throw new UndefinedAssetClassException(sprintf('Asset class for asset factory "%s" could not be determined automatically. Please implement getAssetClassName() or override protected property $assetClassName.', get_class($this)));
         }
 
-        $factoryClassName = get_class($this);
-        $this->assetClassName = (string) preg_replace('#Factory.?Adapter.?#i', '', $factoryClassName);
-
-        if (!class_exists((string) $this->assetClassName)) {
-            throw new UndefinedAssetClassException(sprintf('Asset class for asset factory "%s" could not be determined automatically. Please implement getAssetClassName() or override protected property $assetClassName.', $factoryClassName));
-        }
-
-        return $this->assetClassName;
+        return $assetClassName;
     }
 }

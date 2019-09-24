@@ -22,16 +22,9 @@ final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
 
     public function __construct(Environment $renderer)
     {
+        parent::__construct(1);
+
         $this->renderer = $renderer;
-    }
-
-    public function create(array $options = []): AssetInterface
-    {
-        $options = $this->getOptionsResolver()->resolve($options);
-
-        $asset = new TemplateAsset($this->renderer, $options['template'], $options['parameters']);
-
-        return $asset;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -40,5 +33,13 @@ final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
             ->setDefaults(['parameters' => []])
             ->setRequired(['template'])
         ;
+    }
+
+    public function create(array $options = []): AssetInterface
+    {
+        $options = $this->getOptionsResolver()->resolve($options);
+        $asset = new TemplateAsset($this->renderer, $options['template'], $options['parameters']);
+
+        return $asset;
     }
 }

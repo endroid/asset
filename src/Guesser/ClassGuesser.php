@@ -16,33 +16,28 @@ use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
 
 final class ClassGuesser
 {
+    /** @var array<string, FactoryAdapterInterface> */
     private $factories;
-    private $factoriesAreSorted;
 
     public function __construct()
     {
         $this->factories = [];
-        $this->factoriesAreSorted = false;
     }
 
     public function addFactory(FactoryAdapterInterface $factory): void
     {
-        $this->factories[] = $factory;
-        $this->factoriesAreSorted = false;
+        $this->factories[$factory->getAssetClassName()] = $factory;
+
+        uasort($this->factories, function (FactoryAdapterInterface $factory1, FactoryAdapterInterface $factory2) {
+            return $factory1->getGuesserPriority() - $factory2->getGuesserPriority();
+        });
     }
 
     public function guessClassName(array $options = []): string
     {
-        if (!$this->factoriesAreSorted) {
-            usort($this->factories, function (FactoryAdapterInterface $factory1, FactoryAdapterInterface $factory2) {
-                return $factory1->getGuesserPriority() - $factory2->getGuesserPriority();
-            });
-            $this->factoriesAreSorted = true;
-        }
-
-        foreach ($this->factories as $factory) {
+        foreach ($this->factories as $assetClassName => $factory) {
             if ($factory->isValidGuess($options)) {
-                return $factory->getAssetClassName();
+                return $assetClassName;
             }
         }
 

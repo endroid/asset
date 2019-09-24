@@ -22,10 +22,10 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
     private $cache;
     private $assetFactory;
 
-    protected $guesserPriority = 0;
-
     public function __construct(AdapterInterface $cache, AssetFactory $assetFactory)
     {
+        parent::__construct(0);
+
         $this->cache = $cache;
         $this->assetFactory = $assetFactory;
     }
@@ -33,6 +33,19 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
     public function isValidGuess(array $options): bool
     {
         return isset($options['cache_key']);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver
+            ->setDefaults([
+                'asset_class' => null,
+                'cache_tags' => [],
+                'cache_expires_after' => null,
+                'cache_clear' => false,
+            ])
+            ->setRequired(['cache_key'])
+        ;
     }
 
     public function create(array $options = []): AssetInterface
@@ -51,21 +64,9 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
             }
         }
 
-        $asset = $this->assetFactory->create($assetClassName, $assetOptions);
+        $cachedAsset = $this->assetFactory->create($assetClassName, $assetOptions);
+        $asset = new CacheAsset($cachedAsset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
 
-        return new CacheAsset($asset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver
-            ->setDefaults([
-                'asset_class' => null,
-                'cache_tags' => [],
-                'cache_expires_after' => null,
-                'cache_clear' => false,
-            ])
-            ->setRequired(['cache_key'])
-        ;
+        return $asset;
     }
 }

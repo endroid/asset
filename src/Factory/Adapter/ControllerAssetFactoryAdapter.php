@@ -24,6 +24,8 @@ final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
 
     public function __construct(HttpKernelInterface $kernel, RequestStack $requestStack)
     {
+        parent::__construct(1);
+
         $this->kernel = $kernel;
         $this->requestStack = $requestStack;
     }
@@ -39,7 +41,6 @@ final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-
         $asset = new ControllerAsset($this->kernel, $this->requestStack, $options['controller'], $options['parameters']);
 
         return $asset;

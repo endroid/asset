@@ -17,17 +17,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class UrlAssetFactoryAdapter extends AbstractFactoryAdapter
 {
-    public function create(array $options = []): AssetInterface
-    {
-        $options = $this->getOptionsResolver()->resolve($options);
-
-        $asset = new UrlAsset($options['url']);
-
-        return $asset;
-    }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['url']);
+    }
+
+    public function create(array $options = []): AssetInterface
+    {
+        $options = $this->getOptionsResolver()->resolve($options);
+        $asset = new UrlAsset($options['url']);
+
+        return $asset;
     }
 }
