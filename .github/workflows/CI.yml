@@ -13,6 +13,7 @@ jobs:
     - name: Code quality
       run: |
         curl -sS https://getcomposer.org/installer | php -- --filename=composer
+        composer install --no-interaction --prefer-source
         vendor/bin/code-quality
     - name: Test against highest versions
       run: |
