@@ -27,4 +27,4 @@ jobs:
           vendor/bin/unit-test
           vendor/bin/functional-test ^3.4
       - name: Send Codecov report
-        run: bash <(curl -s https://codecov.io/bash)
+        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
