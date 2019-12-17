@@ -27,7 +27,7 @@ jobs:
           vendor/bin/unit-test
           vendor/bin/functional-test ^3.4
       - name: Archive code coverage results
-        run: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v1
         with:
           name: coverage
           path: tests/coverage
