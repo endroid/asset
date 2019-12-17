@@ -1,3 +1,4 @@
+/composer
 /composer.lock
-/coverage*
+/tests/coverage/
 /vendor/

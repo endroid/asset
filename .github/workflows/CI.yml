@@ -26,5 +26,8 @@ jobs:
           composer update --prefer-lowest
           vendor/bin/unit-test
           vendor/bin/functional-test ^3.4
-      - name: Send Codecov report
-        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
+      - name: Archive code coverage results
+        run: actions/upload-artifact@v1
+        with:
+          name: coverage
+          path: tests/coverage
