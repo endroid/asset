@@ -18,6 +18,9 @@ use PHPUnit\Framework\TestCase;
 
 class AssetFactoryTest extends TestCase
 {
+    /**
+     * @testdox Create data asset via factory
+     */
     public function testFactory(): void
     {
         $assetFactory = new AssetFactory();
