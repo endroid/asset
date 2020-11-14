@@ -19,8 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
 {
-    private $kernel;
-    private $requestStack;
+    private HttpKernelInterface $kernel;
+    private RequestStack $requestStack;
 
     public function __construct(HttpKernelInterface $kernel, RequestStack $requestStack)
     {
@@ -38,11 +38,11 @@ final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
         ;
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-        $asset = new ControllerAsset($this->kernel, $this->requestStack, $options['controller'], $options['parameters']);
 
-        return $asset;
+        return new ControllerAsset($this->kernel, $this->requestStack, $options['controller'], $options['parameters']);
     }
 }

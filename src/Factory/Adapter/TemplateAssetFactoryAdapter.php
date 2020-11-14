@@ -18,7 +18,7 @@ use Twig\Environment;
 
 final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
 {
-    private $renderer;
+    private Environment $renderer;
 
     public function __construct(Environment $renderer)
     {
@@ -35,11 +35,11 @@ final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
         ;
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-        $asset = new TemplateAsset($this->renderer, $options['template'], $options['parameters']);
 
-        return $asset;
+        return new TemplateAsset($this->renderer, $options['template'], $options['parameters']);
     }
 }

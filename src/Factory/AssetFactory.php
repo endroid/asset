@@ -18,17 +18,18 @@ use Endroid\Asset\Guesser\ClassGuesser;
 
 class AssetFactory
 {
-    private $classGuesser;
+    private ClassGuesser $classGuesser;
 
     /** @var array<string, FactoryAdapterInterface> */
-    private $factories;
+    private array $factories;
 
     public function __construct(ClassGuesser $classGuesser = null)
     {
-        $this->classGuesser = $classGuesser ?: new ClassGuesser();
+        $this->classGuesser = $classGuesser instanceof ClassGuesser ? $classGuesser : new ClassGuesser();
         $this->factories = [];
     }
 
+    /** @param iterable<FactoryAdapterInterface> $factories */
     public function addFactories(iterable $factories): void
     {
         foreach ($factories as $factory) {
@@ -42,6 +43,7 @@ class AssetFactory
         $this->classGuesser->addFactory($factory);
     }
 
+    /** @param array<string> $options */
     public function create(string $className = null, array $options = []): AssetInterface
     {
         if (null === $className) {

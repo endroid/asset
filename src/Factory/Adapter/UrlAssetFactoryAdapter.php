@@ -22,11 +22,11 @@ final class UrlAssetFactoryAdapter extends AbstractFactoryAdapter
         $resolver->setRequired(['url']);
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-        $asset = new UrlAsset($options['url']);
 
-        return $asset;
+        return new UrlAsset($options['url']);
     }
 }

@@ -22,11 +22,11 @@ final class DataAssetFactoryAdapter extends AbstractFactoryAdapter
         $resolver->setRequired(['data']);
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-        $asset = new DataAsset($options['data']);
 
-        return $asset;
+        return new DataAsset($options['data']);
     }
 }

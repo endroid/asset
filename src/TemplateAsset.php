@@ -15,10 +15,13 @@ use Twig\Environment;
 
 final class TemplateAsset extends AbstractAsset
 {
-    private $templating;
-    private $template;
-    private $parameters;
+    private Environment $templating;
+    private string $template;
 
+    /** @var array<string> */
+    private array $parameters;
+
+    /** @param array<string> $parameters */
     public function __construct(Environment $templating, string $template, array $parameters = [])
     {
         $this->templating = $templating;

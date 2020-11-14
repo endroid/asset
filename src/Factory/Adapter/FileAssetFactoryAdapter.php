@@ -22,11 +22,11 @@ final class FileAssetFactoryAdapter extends AbstractFactoryAdapter
         $resolver->setRequired(['path']);
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
-        $asset = new FileAsset($options['path']);
 
-        return $asset;
+        return new FileAsset($options['path']);
     }
 }

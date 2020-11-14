@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
-    private $guesserPriority;
+    private int $guesserPriority;
 
     public function __construct(int $guesserPriority = 1)
     {
@@ -28,6 +28,7 @@ abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
         return $this->guesserPriority;
     }
 
+    /** @param array<string> $options */
     public function isValidGuess(array $options): bool
     {
         try {

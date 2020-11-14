@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     private $cache;
-    private $assetFactory;
+    private AssetFactory $assetFactory;
 
     public function __construct(CacheItemPoolInterface $cache, AssetFactory $assetFactory)
     {
@@ -30,6 +30,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
         $this->assetFactory = $assetFactory;
     }
 
+    /** @param array<string> $options */
     public function isValidGuess(array $options): bool
     {
         return isset($options['cache_key']);
@@ -48,6 +49,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
         ;
     }
 
+    /** @param array<string> $options */
     public function create(array $options = []): AssetInterface
     {
         $cacheOptions = $this->getOptionsResolver()->getDefinedOptions();
@@ -65,8 +67,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
         }
 
         $cachedAsset = $this->assetFactory->create($assetClassName, $assetOptions);
-        $asset = new CacheAsset($cachedAsset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
 
-        return $asset;
+        return new CacheAsset($cachedAsset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
     }
 }

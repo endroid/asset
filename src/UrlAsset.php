@@ -13,7 +13,7 @@ namespace Endroid\Asset;
 
 final class UrlAsset extends AbstractAsset
 {
-    private $url;
+    private string $url;
 
     public function __construct(string $url)
     {
@@ -22,6 +22,12 @@ final class UrlAsset extends AbstractAsset
 
     public function getData(): string
     {
-        return (string) file_get_contents($this->url);
+        $data = file_get_contents($this->url);
+
+        if (!is_string($data)) {
+            throw new \Exception(sprintf('Could not load data from URL "%s"', $this->url));
+        }
+
+        return $data;
     }
 }

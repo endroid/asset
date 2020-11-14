@@ -13,7 +13,7 @@ namespace Endroid\Asset;
 
 final class FileAsset extends AbstractAsset
 {
-    private $path;
+    private string $path;
 
     public function __construct(string $path)
     {

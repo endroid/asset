@@ -17,7 +17,7 @@ use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
 final class ClassGuesser
 {
     /** @var array<string, FactoryAdapterInterface> */
-    private $factories;
+    private array $factories;
 
     public function __construct()
     {
@@ -33,6 +33,7 @@ final class ClassGuesser
         });
     }
 
+    /** @param array<string> $options */
     public function guessClassName(array $options = []): string
     {
         foreach ($this->factories as $assetClassName => $factory) {
