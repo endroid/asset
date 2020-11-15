@@ -22,6 +22,9 @@
     "require-dev": {
         "endroid/quality": "dev-master"
     },
+    "replace": {
+        "symfony/polyfill-php80": "*"
+    },
     "suggest": {
         "roave/security-advisories": "Avoids installation of package versions with vulnerabilities",
         "symfony/security-checker": "Checks your composer.lock for vulnerabilities"
