@@ -42,7 +42,7 @@ final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
             ->setDefaults([
                 'asset_class' => null,
                 'cache_tags' => [],
-                'cache_expires_after' => null,
+                'cache_expires_after' => 0,
                 'cache_clear' => false,
             ])
             ->setRequired(['cache_key'])
