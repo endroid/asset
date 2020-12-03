@@ -12,15 +12,15 @@
         }
     ],
     "require": {
-        "php": "^7.4||^8.0",
+        "php": "^7.3||^8.0",
         "endroid/installer": "^1.2.2",
         "symfony/cache-contracts": "^1.1.6||^2.0",
-        "symfony/http-kernel": "^4.4||^5.0",
-        "symfony/options-resolver": "^4.4||^5.0",
+        "symfony/http-kernel": "^3.4||^4.4||^5.0",
+        "symfony/options-resolver": "^3.4||^4.4||^5.0",
         "twig/twig": "^2.6||^3.0"
     },
     "require-dev": {
-        "endroid/quality": "dev-master"
+        "endroid/quality": "^1.0"
     },
     "suggest": {
         "roave/security-advisories": "Avoids installation of package versions with vulnerabilities",
