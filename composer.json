@@ -20,7 +20,7 @@
         "twig/twig": "^2.6||^3.0"
     },
     "require-dev": {
-        "endroid/quality": "^1.0"
+        "endroid/quality": "dev-master"
     },
     "suggest": {
         "roave/security-advisories": "Avoids installation of package versions with vulnerabilities",
