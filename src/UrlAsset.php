@@ -13,7 +13,8 @@ namespace Endroid\Asset;
 
 final class UrlAsset extends AbstractAsset
 {
-    private string $url;
+    /** @var string */
+    private $url;
 
     public function __construct(string $url)
     {

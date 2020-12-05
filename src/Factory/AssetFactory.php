@@ -18,10 +18,11 @@ use Endroid\Asset\Guesser\ClassGuesser;
 
 class AssetFactory
 {
-    private ClassGuesser $classGuesser;
+    /** @var ClassGuesser */
+    private $classGuesser;
 
     /** @var array<string, FactoryAdapterInterface> */
-    private array $factories;
+    private $factories;
 
     public function __construct(ClassGuesser $classGuesser = null)
     {

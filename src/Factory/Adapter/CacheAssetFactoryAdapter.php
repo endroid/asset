@@ -19,8 +19,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
 {
+    /** @var CacheItemPoolInterface */
     private $cache;
-    private AssetFactory $assetFactory;
+
+    /** @var AssetFactory */
+    private $assetFactory;
 
     public function __construct(CacheItemPoolInterface $cache, AssetFactory $assetFactory)
     {

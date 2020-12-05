@@ -16,7 +16,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
-    private int $guesserPriority;
+    /** @var int */
+    private $guesserPriority;
 
     public function __construct(int $guesserPriority = 1)
     {

@@ -16,15 +16,23 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 final class CacheAsset extends AbstractAsset
 {
-    private AssetInterface $asset;
+    /** @var AssetInterface */
+    private $asset;
+
+    /** @var CacheItemPoolInterface */
     private $cache;
-    private string $key;
+
+    /** @var string */
+    private $key;
 
     /** @var array<string> */
-    private array $tags;
+    private $tags;
 
-    private int $expiresAfter;
-    private bool $clear;
+    /** @var int */
+    private $expiresAfter;
+
+    /** @var bool */
+    private $clear;
 
     /** @param array<string> $tags */
     public function __construct(
