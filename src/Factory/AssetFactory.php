@@ -44,7 +44,7 @@ class AssetFactory
         $this->classGuesser->addFactory($factory);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
     public function create(string $className = null, array $options = []): AssetInterface
     {
         if (null === $className) {
