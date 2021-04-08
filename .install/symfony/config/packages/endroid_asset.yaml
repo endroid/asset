@@ -15,6 +15,7 @@ services:
     Endroid\Asset\Guesser\ClassGuesser: ~
 
     Endroid\Asset\Factory\Adapter\CacheAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\CallbackAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\ControllerAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\DataAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\FileAssetFactoryAdapter: ~
