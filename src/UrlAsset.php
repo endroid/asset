@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Request;
+
 final class UrlAsset extends AbstractAsset
 {
     /** @var string */
@@ -23,9 +26,11 @@ final class UrlAsset extends AbstractAsset
 
     public function getData(): string
     {
-        $data = file_get_contents($this->url);
+        $client = HttpClient::create();
 
-        if (!is_string($data)) {
+        try {
+            $data = $client->request(Request::METHOD_GET, $this->url)->getContent();
+        } catch (\Exception $exception) {
             throw new \Exception(sprintf('Could not load data from URL "%s"', $this->url));
         }
 
