@@ -16,8 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class UrlAsset extends AbstractAsset
 {
-    /** @var string */
-    private $url;
+    private string $url;
 
     public function __construct(string $url)
     {

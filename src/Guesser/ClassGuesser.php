@@ -17,7 +17,7 @@ use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
 final class ClassGuesser
 {
     /** @var array<string, FactoryAdapterInterface> */
-    private $factories = [];
+    private array $factories = [];
 
     public function addFactory(FactoryAdapterInterface $factory): void
     {

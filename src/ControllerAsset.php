@@ -19,17 +19,12 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class ControllerAsset extends AbstractAsset
 {
-    /** @var HttpKernelInterface */
-    private $kernel;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var string */
-    private $controller;
+    private HttpKernelInterface $kernel;
+    private RequestStack $requestStack;
+    private string $controller;
 
     /** @var array<mixed> */
-    private $controllerParameters;
+    private array $controllerParameters;
 
     /** @param array<mixed> $controllerParameters */
     public function __construct(

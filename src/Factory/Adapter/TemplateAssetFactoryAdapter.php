@@ -18,8 +18,7 @@ use Twig\Environment;
 
 final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
 {
-    /** @var Environment */
-    private $renderer;
+    private Environment $renderer;
 
     public function __construct(Environment $renderer)
     {
