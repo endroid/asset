@@ -19,5 +19,6 @@ services:
     Endroid\Asset\Factory\Adapter\ControllerAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\DataAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\FileAssetFactoryAdapter: ~
+    Endroid\Asset\Factory\Adapter\MultiUrlAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\TemplateAssetFactoryAdapter: ~
     Endroid\Asset\Factory\Adapter\UrlAssetFactoryAdapter: ~
