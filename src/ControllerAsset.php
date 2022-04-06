@@ -52,6 +52,7 @@ final class ControllerAsset extends AbstractAsset
         $subRequest = $request->duplicate([], null, $this->controllerParameters);
 
         $response = $this->kernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+        /** @psalm-suppress ReservedWord */
         $data = $response->getContent();
 
         if (!is_string($data)) {
