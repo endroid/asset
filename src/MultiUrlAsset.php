@@ -2,24 +2,14 @@
 
 declare(strict_types=1);
 
-/*
- * (c) Jeroen van den Enden <info@endroid.nl>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Endroid\Asset;
 
 final class MultiUrlAsset extends AbstractAsset
 {
-    /** @var array<string> */
-    private array $urls;
-
-    /** @param array<string> $urls */
-    public function __construct(array $urls)
-    {
-        $this->urls = $urls;
+    public function __construct(
+        /** @var array<string> */
+        private array $urls
+    ) {
     }
 
     public function getData(): string

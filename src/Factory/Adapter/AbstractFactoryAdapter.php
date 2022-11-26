@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * (c) Jeroen van den Enden <info@endroid.nl>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Endroid\Asset\Factory\Adapter;
 
 use Endroid\Asset\Exception\UndefinedAssetClassException;
@@ -16,11 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
-    private int $guesserPriority;
-
-    public function __construct(int $guesserPriority = 1)
-    {
-        $this->guesserPriority = $guesserPriority;
+    public function __construct(
+        public int $guesserPriority = 1
+    ) {
     }
 
     public function getGuesserPriority(): int

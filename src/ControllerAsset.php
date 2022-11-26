@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * (c) Jeroen van den Enden <info@endroid.nl>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Endroid\Asset;
 
 use Endroid\Asset\Exception\InvalidRequestException;
@@ -19,24 +12,13 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class ControllerAsset extends AbstractAsset
 {
-    private HttpKernelInterface $kernel;
-    private RequestStack $requestStack;
-    private string $controller;
-
-    /** @var array<mixed> */
-    private array $controllerParameters;
-
-    /** @param array<mixed> $controllerParameters */
     public function __construct(
-        HttpKernelInterface $kernel,
-        RequestStack $requestStack,
-        string $controller,
-        array $controllerParameters = []
+        private HttpKernelInterface $kernel,
+        private RequestStack $requestStack,
+        private string $controller,
+        /** @var array<mixed> */
+        private array $controllerParameters = []
     ) {
-        $this->kernel = $kernel;
-        $this->requestStack = $requestStack;
-        $this->controller = $controller;
-        $this->controllerParameters = $controllerParameters;
     }
 
     public function getData(): string

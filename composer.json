@@ -27,7 +27,10 @@
         "roave/security-advisories": "Avoids installation of package versions with vulnerabilities"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "endroid/installer": true
+        }
     },
     "autoload": {
         "psr-4": {
