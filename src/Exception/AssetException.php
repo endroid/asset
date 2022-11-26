@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace Endroid\Asset\Exception;
 
-use Exception;
-
-abstract class AssetException extends Exception
+abstract class AssetException extends \Exception
 {
 }
