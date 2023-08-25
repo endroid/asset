@@ -32,7 +32,7 @@ final class MultiUrlAsset extends AbstractAsset
 
         $data = [];
         foreach ($handles as $key => $handle) {
-            $data[$key] = strval(curl_multi_getcontent($handle));
+            $data[$key] = curl_multi_getcontent($handle);
             if (0 !== curl_errno($handle)) {
                 throw new \RuntimeException(sprintf('Error while downloading "%s": %s', $this->urls[$key], curl_error($handle)));
             }
