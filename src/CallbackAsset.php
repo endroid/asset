@@ -6,12 +6,10 @@ namespace Endroid\Asset;
 
 final class CallbackAsset extends AbstractAsset
 {
-    /** @var callable */
-    private $callable;
-
-    public function __construct(callable $callable)
-    {
-        $this->callable = $callable;
+    public function __construct(
+        /** @var callable */
+        private readonly mixed $callable
+    ) {
     }
 
     public function getData(): string

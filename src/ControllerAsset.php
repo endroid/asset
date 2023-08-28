@@ -13,11 +13,11 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 final class ControllerAsset extends AbstractAsset
 {
     public function __construct(
-        private HttpKernelInterface $kernel,
-        private RequestStack $requestStack,
-        private string $controller,
+        private readonly HttpKernelInterface $kernel,
+        private readonly RequestStack $requestStack,
+        private readonly string $controller,
         /** @var array<mixed> */
-        private array $controllerParameters = []
+        private readonly array $controllerParameters = []
     ) {
     }
 
@@ -29,12 +29,12 @@ final class ControllerAsset extends AbstractAsset
             throw new InvalidRequestException('Could not determine current request');
         }
 
-        $this->controllerParameters['_forwarded'] = $request->attributes;
-        $this->controllerParameters['_controller'] = $this->controller;
-        $subRequest = $request->duplicate([], null, $this->controllerParameters);
+        $subRequest = $request->duplicate([], null, $this->controllerParameters + [
+            '_forwarded' => $request->attributes,
+            '_controller' => $this->controller,
+        ]);
 
         $response = $this->kernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
-        /** @psalm-suppress ReservedWord */
         $data = $response->getContent();
 
         if (!is_string($data)) {

@@ -9,17 +9,13 @@ use Endroid\Asset\Exception\UnsupportedAssetClassException;
 use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
 use Endroid\Asset\Guesser\ClassGuesser;
 
-class AssetFactory
+final class AssetFactory
 {
-    private ClassGuesser $classGuesser;
-
-    /** @var array<string, FactoryAdapterInterface> */
-    private array $factories;
-
-    public function __construct(ClassGuesser $classGuesser = null)
-    {
-        $this->classGuesser = $classGuesser instanceof ClassGuesser ? $classGuesser : new ClassGuesser();
-        $this->factories = [];
+    public function __construct(
+        private readonly ClassGuesser $classGuesser = new ClassGuesser(),
+        /** @var array<string, FactoryAdapterInterface> */
+        private array $factories = []
+    ) {
     }
 
     /** @param iterable<FactoryAdapterInterface> $factories */

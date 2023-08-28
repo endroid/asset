@@ -9,8 +9,11 @@ use Endroid\Asset\Factory\Adapter\FactoryAdapterInterface;
 
 final class ClassGuesser
 {
-    /** @var array<string, FactoryAdapterInterface> */
-    private array $factories = [];
+    public function __construct(
+        /** @var array<string, FactoryAdapterInterface> */
+        private array $factories = []
+    ) {
+    }
 
     public function addFactory(FactoryAdapterInterface $factory): void
     {

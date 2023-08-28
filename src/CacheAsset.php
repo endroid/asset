@@ -10,13 +10,13 @@ use Symfony\Contracts\Cache\ItemInterface;
 final class CacheAsset extends AbstractAsset
 {
     public function __construct(
-        private AssetInterface $asset,
-        private CacheItemPoolInterface $cache,
-        private string $key,
+        private readonly AssetInterface $asset,
+        private readonly CacheItemPoolInterface $cache,
+        private readonly string $key,
         /** @var array<string> */
-        private array $tags = [],
-        private int $expiresAfter = 0,
-        private bool $clear = false
+        private readonly array $tags = [],
+        private readonly int $expiresAfter = 0,
+        private readonly bool $clear = false
     ) {
     }
 

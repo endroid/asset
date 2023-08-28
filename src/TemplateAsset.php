@@ -9,10 +9,10 @@ use Twig\Environment;
 final class TemplateAsset extends AbstractAsset
 {
     public function __construct(
-        private Environment $templating,
-        private string $template,
-        /** @var array<string> */
-        private array $parameters = []
+        private readonly Environment $templating,
+        private readonly string $template,
+        /** @param array<mixed> */
+        private readonly array $parameters = []
     ) {
     }
 

@@ -9,7 +9,7 @@ use Endroid\Asset\Factory\Adapter\DataAssetFactoryAdapter;
 use Endroid\Asset\Factory\AssetFactory;
 use PHPUnit\Framework\TestCase;
 
-class AssetFactoryTest extends TestCase
+final class AssetFactoryTest extends TestCase
 {
     /**
      * @testdox Create data asset via factory

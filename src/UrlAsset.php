@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class UrlAsset extends AbstractAsset
 {
     public function __construct(
-        private string $url
+        private readonly string $url
     ) {
     }
 

@@ -8,7 +8,7 @@ final class MultiUrlAsset extends AbstractAsset
 {
     public function __construct(
         /** @var array<string> */
-        private array $urls
+        private readonly array $urls
     ) {
     }
 

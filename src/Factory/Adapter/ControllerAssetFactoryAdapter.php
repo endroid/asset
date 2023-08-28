@@ -13,8 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
-        private HttpKernelInterface $kernel,
-        private RequestStack $requestStack
+        private readonly HttpKernelInterface $kernel,
+        private readonly RequestStack $requestStack
     ) {
         parent::__construct(1);
     }
