@@ -11,7 +11,7 @@ final class TemplateAsset extends AbstractAsset
     public function __construct(
         private readonly Environment $templating,
         private readonly string $template,
-        /** @param array<mixed> */
+        /** @var array<mixed> */
         private readonly array $parameters = []
     ) {
     }
