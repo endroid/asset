@@ -10,14 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-final class ControllerAsset extends AbstractAsset
+final readonly class ControllerAsset extends AbstractAsset
 {
     public function __construct(
-        private readonly HttpKernelInterface $kernel,
-        private readonly RequestStack $requestStack,
-        private readonly string $controller,
+        private HttpKernelInterface $kernel,
+        private RequestStack $requestStack,
+        private string $controller,
         /** @var array<mixed> */
-        private readonly array $controllerParameters = []
+        private array $controllerParameters = []
     ) {
     }
 

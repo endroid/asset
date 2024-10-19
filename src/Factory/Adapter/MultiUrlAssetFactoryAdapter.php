@@ -8,7 +8,7 @@ use Endroid\Asset\AssetInterface;
 use Endroid\Asset\MultiUrlAsset;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class MultiUrlAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class MultiUrlAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function configureOptions(OptionsResolver $resolver): void
     {

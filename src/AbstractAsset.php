@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
-abstract class AbstractAsset implements AssetInterface
+abstract readonly class AbstractAsset implements AssetInterface
 {
     abstract public function getData(): string;
 

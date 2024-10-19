@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
-final class FileAsset extends AbstractAsset
+final readonly class FileAsset extends AbstractAsset
 {
     public function __construct(
-        private readonly string $path
+        private string $path
     ) {
     }
 

@@ -8,7 +8,7 @@ use Endroid\Asset\AssetInterface;
 use Endroid\Asset\CallbackAsset;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CallbackAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class CallbackAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
-final class CallbackAsset extends AbstractAsset
+final readonly class CallbackAsset extends AbstractAsset
 {
     public function __construct(
         /** @var callable */
-        private readonly mixed $callable
+        private mixed $callable
     ) {
     }
 

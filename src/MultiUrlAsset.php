@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Endroid\Asset;
 
-final class MultiUrlAsset extends AbstractAsset
+final readonly class MultiUrlAsset extends AbstractAsset
 {
     public function __construct(
         /** @var array<string> */
-        private readonly array $urls
+        private array $urls
     ) {
     }
 

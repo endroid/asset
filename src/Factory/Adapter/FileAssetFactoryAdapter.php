@@ -8,7 +8,7 @@ use Endroid\Asset\AssetInterface;
 use Endroid\Asset\FileAsset;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class FileAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class FileAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function configureOptions(OptionsResolver $resolver): void
     {

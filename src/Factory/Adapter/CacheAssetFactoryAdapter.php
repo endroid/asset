@@ -10,11 +10,11 @@ use Endroid\Asset\Factory\AssetFactory;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
-        private readonly CacheItemPoolInterface $cache,
-        private readonly AssetFactory $assetFactory
+        private CacheItemPoolInterface $cache,
+        private AssetFactory $assetFactory
     ) {
         parent::__construct(0);
     }

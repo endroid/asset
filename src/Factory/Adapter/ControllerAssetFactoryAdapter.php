@@ -10,11 +10,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class ControllerAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
-        private readonly HttpKernelInterface $kernel,
-        private readonly RequestStack $requestStack
+        private HttpKernelInterface $kernel,
+        private RequestStack $requestStack
     ) {
         parent::__construct(1);
     }

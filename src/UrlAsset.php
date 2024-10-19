@@ -7,10 +7,10 @@ namespace Endroid\Asset;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 
-final class UrlAsset extends AbstractAsset
+final readonly class UrlAsset extends AbstractAsset
 {
     public function __construct(
-        private readonly string $url
+        private string $url
     ) {
     }
 

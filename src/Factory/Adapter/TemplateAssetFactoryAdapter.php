@@ -9,10 +9,10 @@ use Endroid\Asset\TemplateAsset;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
-final class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
+final readonly class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
-        private readonly Environment $renderer
+        private Environment $renderer
     ) {
         parent::__construct(1);
     }

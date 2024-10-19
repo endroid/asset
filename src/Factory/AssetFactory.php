@@ -33,7 +33,7 @@ final class AssetFactory
     }
 
     /** @param array<mixed> $options */
-    public function create(?string $className = null, array $options = []): AssetInterface
+    public function create(string $className = null, array $options = []): AssetInterface
     {
         if (null === $className) {
             $className = $this->classGuesser->guessClassName($options);
@@ -43,8 +43,6 @@ final class AssetFactory
             throw new UnsupportedAssetClassException(sprintf('Asset class "%s" is not supported', $className));
         }
 
-        $asset = $this->factories[$className]->create($options);
-
-        return $asset;
+        return $this->factories[$className]->create($options);
     }
 }

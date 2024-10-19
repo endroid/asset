@@ -7,10 +7,10 @@ namespace Endroid\Asset\Factory\Adapter;
 use Endroid\Asset\Exception\UndefinedAssetClassException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-abstract class AbstractFactoryAdapter implements FactoryAdapterInterface
+abstract readonly class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
     public function __construct(
-        public readonly int $guesserPriority = 1
+        public int $guesserPriority = 1
     ) {
     }
 

@@ -6,13 +6,13 @@ namespace Endroid\Asset;
 
 use Twig\Environment;
 
-final class TemplateAsset extends AbstractAsset
+final readonly class TemplateAsset extends AbstractAsset
 {
     public function __construct(
-        private readonly Environment $templating,
-        private readonly string $template,
+        private Environment $templating,
+        private string $template,
         /** @var array<mixed> */
-        private readonly array $parameters = []
+        private array $parameters = []
     ) {
     }
 
