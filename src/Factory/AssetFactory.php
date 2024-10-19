@@ -33,7 +33,7 @@ final class AssetFactory
     }
 
     /** @param array<mixed> $options */
-    public function create(string $className = null, array $options = []): AssetInterface
+    public function create(?string $className = null, array $options = []): AssetInterface
     {
         if (null === $className) {
             $className = $this->classGuesser->guessClassName($options);
