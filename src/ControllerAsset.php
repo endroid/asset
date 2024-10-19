@@ -17,7 +17,7 @@ final readonly class ControllerAsset extends AbstractAsset
         private RequestStack $requestStack,
         private string $controller,
         /** @var array<mixed> */
-        private array $controllerParameters = []
+        private array $controllerParameters = [],
     ) {
     }
 

@@ -14,7 +14,7 @@ final class AssetFactory
     public function __construct(
         private readonly ClassGuesser $classGuesser = new ClassGuesser(),
         /** @var array<string, FactoryAdapterInterface> */
-        private array $factories = []
+        private array $factories = [],
     ) {
     }
 
@@ -33,7 +33,7 @@ final class AssetFactory
     }
 
     /** @param array<mixed> $options */
-    public function create(string $className = null, array $options = []): AssetInterface
+    public function create(?string $className = null, array $options = []): AssetInterface
     {
         if (null === $className) {
             $className = $this->classGuesser->guessClassName($options);

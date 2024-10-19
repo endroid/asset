@@ -16,7 +16,7 @@ final readonly class CacheAsset extends AbstractAsset
         /** @var array<string> */
         private array $tags = [],
         private int $expiresAfter = 0,
-        private bool $clear = false
+        private bool $clear = false,
     ) {
     }
 

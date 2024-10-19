@@ -14,7 +14,7 @@ final readonly class ControllerAssetFactoryAdapter extends AbstractFactoryAdapte
 {
     public function __construct(
         private HttpKernelInterface $kernel,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {
         parent::__construct(1);
     }

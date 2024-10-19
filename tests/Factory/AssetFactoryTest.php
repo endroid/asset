@@ -7,13 +7,12 @@ namespace Endroid\Asset\Tests\Factory;
 use Endroid\Asset\DataAsset;
 use Endroid\Asset\Factory\Adapter\DataAssetFactoryAdapter;
 use Endroid\Asset\Factory\AssetFactory;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 final class AssetFactoryTest extends TestCase
 {
-    /**
-     * @testdox Create data asset via factory
-     */
+    #[TestDox('Create data asset via factory')]
     public function testFactory(): void
     {
         $assetFactory = new AssetFactory();

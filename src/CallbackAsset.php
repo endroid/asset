@@ -8,7 +8,7 @@ final readonly class CallbackAsset extends AbstractAsset
 {
     public function __construct(
         /** @var callable */
-        private mixed $callable
+        private mixed $callable,
     ) {
     }
 

@@ -14,7 +14,7 @@ final readonly class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
         private CacheItemPoolInterface $cache,
-        private AssetFactory $assetFactory
+        private AssetFactory $assetFactory,
     ) {
         parent::__construct(0);
     }

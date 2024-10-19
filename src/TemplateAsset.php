@@ -12,7 +12,7 @@ final readonly class TemplateAsset extends AbstractAsset
         private Environment $templating,
         private string $template,
         /** @var array<mixed> */
-        private array $parameters = []
+        private array $parameters = [],
     ) {
     }
 

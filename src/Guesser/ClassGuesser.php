@@ -11,7 +11,7 @@ final class ClassGuesser
 {
     public function __construct(
         /** @var array<string, FactoryAdapterInterface> */
-        private array $factories = []
+        private array $factories = [],
     ) {
     }
 

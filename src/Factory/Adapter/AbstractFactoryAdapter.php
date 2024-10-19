@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract readonly class AbstractFactoryAdapter implements FactoryAdapterInterface
 {
     public function __construct(
-        public int $guesserPriority = 1
+        public int $guesserPriority = 1,
     ) {
     }
 

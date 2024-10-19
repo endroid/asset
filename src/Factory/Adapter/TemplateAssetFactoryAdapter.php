@@ -12,7 +12,7 @@ use Twig\Environment;
 final readonly class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
 {
     public function __construct(
-        private Environment $renderer
+        private Environment $renderer,
     ) {
         parent::__construct(1);
     }

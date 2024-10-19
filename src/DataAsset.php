@@ -7,7 +7,7 @@ namespace Endroid\Asset;
 final readonly class DataAsset extends AbstractAsset
 {
     public function __construct(
-        private string $data
+        private string $data,
     ) {
     }
 
