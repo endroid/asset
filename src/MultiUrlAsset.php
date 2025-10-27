@@ -7,7 +7,7 @@ namespace Endroid\Asset;
 final readonly class MultiUrlAsset extends AbstractAsset
 {
     public function __construct(
-        /** @var array<string> */
+        /** @var array<non-empty-string> */
         private array $urls,
     ) {
     }

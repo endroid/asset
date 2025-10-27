@@ -10,7 +10,7 @@ services:
 
     Endroid\Asset\Factory\AssetFactory:
         calls:
-            - [addFactories, [!tagged endroid_asset.factory_adapter]]
+            - [addFactories, [!tagged_iterator endroid_asset.factory_adapter]]
 
     Endroid\Asset\Guesser\ClassGuesser: ~
 
