@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "endroid/installer": "^1.5",
         "symfony/cache-contracts": "^3.0",
         "symfony/http-client": "^6.4||^7.4||^8.0",
