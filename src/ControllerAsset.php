@@ -18,9 +18,9 @@ final readonly class ControllerAsset extends AbstractAsset
         private string $controller,
         /** @var array<mixed> */
         private array $controllerParameters = [],
-    ) {
-    }
+    ) {}
 
+    #[\Override]
     public function getData(): string
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -29,10 +29,15 @@ final readonly class ControllerAsset extends AbstractAsset
             throw new InvalidRequestException('Could not determine current request');
         }
 
-        $subRequest = $request->duplicate([], null, $this->controllerParameters + [
-            '_forwarded' => $request->attributes,
-            '_controller' => $this->controller,
-        ]);
+        $subRequest = $request->duplicate(
+            [],
+            null,
+            $this->controllerParameters
+            + [
+                '_forwarded' => $request->attributes,
+                '_controller' => $this->controller,
+            ],
+        );
 
         $response = $this->kernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
         $data = $response->getContent();

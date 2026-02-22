@@ -10,16 +10,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final readonly class CallbackAssetFactoryAdapter extends AbstractFactoryAdapter
 {
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['callback']);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
 
-        return new CallbackAsset($options['callback']);
+        /** @var callable $callback */
+        $callback = $options['callback'] ?? static fn(): string => '';
+
+        return new CallbackAsset($callback);
     }
 }

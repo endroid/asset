@@ -17,9 +17,9 @@ final readonly class CacheAsset extends AbstractAsset
         private array $tags = [],
         private int $expiresAfter = 0,
         private bool $clear = false,
-    ) {
-    }
+    ) {}
 
+    #[\Override]
     public function getData(): string
     {
         if ($this->clear) {
@@ -29,11 +29,18 @@ final readonly class CacheAsset extends AbstractAsset
         $cacheItem = $this->cache->getItem($this->key);
 
         if ($cacheItem->isHit()) {
-            return $cacheItem->get();
+            return (string) $cacheItem->get();
         }
 
         $data = $this->asset->getData();
 
+        $this->saveCacheItem($cacheItem, $data);
+
+        return $data;
+    }
+
+    private function saveCacheItem(\Psr\Cache\CacheItemInterface $cacheItem, string $data): void
+    {
         $cacheItem->set($data);
 
         if (count($this->tags) > 0 && $cacheItem instanceof ItemInterface) {
@@ -45,7 +52,5 @@ final readonly class CacheAsset extends AbstractAsset
         }
 
         $this->cache->save($cacheItem);
-
-        return $data;
     }
 }

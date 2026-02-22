@@ -17,19 +17,21 @@ final readonly class TemplateAssetFactoryAdapter extends AbstractFactoryAdapter
         parent::__construct(1);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver
-            ->setDefaults(['parameters' => []])
-            ->setRequired(['template'])
-        ;
+        $resolver->setDefaults(['parameters' => []])->setRequired(['template']);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
 
-        return new TemplateAsset($this->renderer, $options['template'], $options['parameters']);
+        /** @var array<mixed> $parameters */
+        $parameters = $options['parameters'] ?? [];
+
+        return new TemplateAsset($this->renderer, (string) ($options['template'] ?? ''), $parameters);
     }
 }

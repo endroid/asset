@@ -15,8 +15,7 @@ final class AssetFactory
         private readonly ClassGuesser $classGuesser = new ClassGuesser(),
         /** @var array<string, FactoryAdapterInterface> */
         private array $factories = [],
-    ) {
-    }
+    ) {}
 
     /** @param iterable<FactoryAdapterInterface> $factories */
     public function addFactories(iterable $factories): void
@@ -39,7 +38,7 @@ final class AssetFactory
             $className = $this->classGuesser->guessClassName($options);
         }
 
-        if (!isset($this->factories[$className])) {
+        if (!array_key_exists($className, $this->factories)) {
             throw new UnsupportedAssetClassException(sprintf('Asset class "%s" is not supported', $className));
         }
 

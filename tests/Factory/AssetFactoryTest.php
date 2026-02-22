@@ -22,7 +22,7 @@ final class AssetFactoryTest extends TestCase
             'data' => 'Asset data',
         ]);
 
-        $this->assertInstanceOf(DataAsset::class, $asset);
-        $this->assertEquals($asset->getData(), 'Asset data');
+        static::assertInstanceOf(DataAsset::class, $asset);
+        static::assertSame($asset->getData(), 'Asset data');
     }
 }

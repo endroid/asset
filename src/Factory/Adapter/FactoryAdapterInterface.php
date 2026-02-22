@@ -13,11 +13,11 @@ interface FactoryAdapterInterface
 
     public function getGuesserPriority(): int;
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
     public function isValidGuess(array $options): bool;
 
     public function configureOptions(OptionsResolver $resolver): void;
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
     public function create(array $options): AssetInterface;
 }

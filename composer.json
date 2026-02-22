@@ -1,7 +1,10 @@
 {
     "name": "endroid/asset",
     "description": "Endroid Asset",
-    "keywords": ["endroid", "asset"],
+    "keywords": [
+        "endroid",
+        "asset"
+    ],
     "homepage": "https://github.com/endroid/asset",
     "type": "library",
     "license": "MIT",

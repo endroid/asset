@@ -11,9 +11,9 @@ final readonly class UrlAsset extends AbstractAsset
 {
     public function __construct(
         private string $url,
-    ) {
-    }
+    ) {}
 
+    #[\Override]
     public function getData(): string
     {
         $client = HttpClient::create();

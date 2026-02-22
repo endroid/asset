@@ -13,9 +13,9 @@ final readonly class TemplateAsset extends AbstractAsset
         private string $template,
         /** @var array<mixed> */
         private array $parameters = [],
-    ) {
-    }
+    ) {}
 
+    #[\Override]
     public function getData(): string
     {
         return $this->templating->render($this->template, $this->parameters);

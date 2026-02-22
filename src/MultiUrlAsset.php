@@ -9,15 +9,19 @@ final readonly class MultiUrlAsset extends AbstractAsset
     public function __construct(
         /** @var array<non-empty-string> */
         private array $urls,
-    ) {
-    }
+    ) {}
 
+    #[\Override]
     public function getData(): string
     {
         $handles = [];
         $multiHandle = curl_multi_init();
         foreach ($this->urls as $key => $url) {
             $handle = curl_init();
+            if (false === $handle) {
+                throw new \RuntimeException(sprintf('Failed to initialize cURL handle for "%s"', $url));
+            }
+
             curl_setopt_array($handle, [
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
@@ -34,7 +38,11 @@ final readonly class MultiUrlAsset extends AbstractAsset
         foreach ($handles as $key => $handle) {
             $data[$key] = curl_multi_getcontent($handle);
             if (0 !== curl_errno($handle)) {
-                throw new \RuntimeException(sprintf('Error while downloading "%s": %s', $this->urls[$key], curl_error($handle)));
+                throw new \RuntimeException(sprintf(
+                    'Error while downloading "%s": %s',
+                    $this->urls[$key],
+                    curl_error($handle),
+                ));
             }
         }
 

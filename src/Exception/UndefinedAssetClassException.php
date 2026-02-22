@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace Endroid\Asset\Exception;
 
-final class UndefinedAssetClassException extends AssetException
-{
-}
+final class UndefinedAssetClassException extends AssetException {}

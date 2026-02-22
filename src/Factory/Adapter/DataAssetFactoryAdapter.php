@@ -10,16 +10,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final readonly class DataAssetFactoryAdapter extends AbstractFactoryAdapter
 {
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['data']);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
 
-        return new DataAsset($options['data']);
+        return new DataAsset((string) ($options['data'] ?? ''));
     }
 }

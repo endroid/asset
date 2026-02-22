@@ -19,44 +19,52 @@ final readonly class CacheAssetFactoryAdapter extends AbstractFactoryAdapter
         parent::__construct(0);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function isValidGuess(array $options): bool
     {
-        return isset($options['cache_key']);
+        return array_key_exists('cache_key', $options);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver
-            ->setDefaults([
-                'asset_class' => null,
-                'cache_tags' => [],
-                'cache_expires_after' => 0,
-                'cache_clear' => false,
-            ])
-            ->setRequired(['cache_key'])
-        ;
+        $resolver->setDefaults([
+            'asset_class' => null,
+            'cache_tags' => [],
+            'cache_expires_after' => 0,
+            'cache_clear' => false,
+        ])->setRequired(['cache_key']);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function create(array $options = []): AssetInterface
     {
         $cacheOptions = $this->getOptionsResolver()->getDefinedOptions();
 
         $optionsResolver = clone $this->getOptionsResolver();
-        $optionsResolver->setDefined(array_keys($options));
+        $optionsResolver->setDefined(array_map(strval(...), array_keys($options)));
         $options = $optionsResolver->resolve($options);
 
-        $assetClassName = $options['asset_class'];
-        $assetOptions = [];
-        foreach ($options as $key => $value) {
-            if (!in_array($key, $cacheOptions)) {
-                $assetOptions[$key] = $value;
-            }
-        }
+        $assetClassName = (string) ($options['asset_class'] ?? '');
+        $assetOptions = array_diff_key($options, array_flip($cacheOptions));
 
         $cachedAsset = $this->assetFactory->create($assetClassName, $assetOptions);
 
-        return new CacheAsset($cachedAsset, $this->cache, $options['cache_key'], $options['cache_tags'], $options['cache_expires_after'], $options['cache_clear']);
+        /** @var array<string> $cacheTags */
+        $cacheTags = $options['cache_tags'] ?? [];
+
+        /** @var bool $cacheClear */
+        $cacheClear = $options['cache_clear'] ?? false;
+
+        return new CacheAsset(
+            $cachedAsset,
+            $this->cache,
+            (string) ($options['cache_key'] ?? ''),
+            $cacheTags,
+            (int) ($options['cache_expires_after'] ?? 0),
+            $cacheClear,
+        );
     }
 }

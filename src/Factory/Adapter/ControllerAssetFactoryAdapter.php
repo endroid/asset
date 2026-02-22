@@ -19,19 +19,26 @@ final readonly class ControllerAssetFactoryAdapter extends AbstractFactoryAdapte
         parent::__construct(1);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver
-            ->setDefaults(['parameters' => []])
-            ->setRequired(['controller'])
-        ;
+        $resolver->setDefaults(['parameters' => []])->setRequired(['controller']);
     }
 
-    /** @param array<string> $options */
+    /** @param array<mixed> $options */
+    #[\Override]
     public function create(array $options = []): AssetInterface
     {
         $options = $this->getOptionsResolver()->resolve($options);
 
-        return new ControllerAsset($this->kernel, $this->requestStack, $options['controller'], $options['parameters']);
+        /** @var array<mixed> $parameters */
+        $parameters = $options['parameters'] ?? [];
+
+        return new ControllerAsset(
+            $this->kernel,
+            $this->requestStack,
+            (string) ($options['controller'] ?? ''),
+            $parameters,
+        );
     }
 }
