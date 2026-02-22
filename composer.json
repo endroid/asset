@@ -32,6 +32,7 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
+            "carthage-software/mago": true,
             "endroid/installer": true
         }
     },
