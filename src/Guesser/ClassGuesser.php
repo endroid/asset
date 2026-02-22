@@ -30,12 +30,11 @@ final class ClassGuesser
     /** @param array<mixed> $options */
     public function guessClassName(array $options = []): string
     {
-        foreach ($this->factories as $assetClassName => $factory) {
-            if ($factory->isValidGuess($options)) {
-                return $assetClassName;
-            }
-        }
-
-        throw new UndefinedAssetClassException('Asset class could not be guessed');
+        return (
+            array_find_key(
+                $this->factories,
+                static fn(FactoryAdapterInterface $factory): bool => $factory->isValidGuess($options),
+            ) ?? throw new UndefinedAssetClassException('Asset class could not be guessed')
+        );
     }
 }
