@@ -27,22 +27,19 @@ final readonly class MultiUrlAsset extends AbstractAsset
                 CURLOPT_RETURNTRANSFER => true,
             ]);
             curl_multi_add_handle($multiHandle, $handle);
-            $handles[$key] = $handle;
+            $handles[$key] = [$url, $handle];
         }
 
+        $active = 0;
         do {
             curl_multi_exec($multiHandle, $active);
         } while ($active > 0);
 
         $data = [];
-        foreach ($handles as $key => $handle) {
+        foreach ($handles as $key => [$url, $handle]) {
             $data[$key] = curl_multi_getcontent($handle);
             if (0 !== curl_errno($handle)) {
-                throw new \RuntimeException(sprintf(
-                    'Error while downloading "%s": %s',
-                    $this->urls[$key],
-                    curl_error($handle),
-                ));
+                throw new \RuntimeException(sprintf('Error while downloading "%s": %s', $url, curl_error($handle)));
             }
         }
 
